@@ -22,7 +22,13 @@ operations = {
     if b != 0
     else "나눗셈 오류"
 }
+# key : value 딕셔너리 형태
+# key 값은 +, -, *, / 의 문자열
+# value 는 람다식
+
 operator_fx = random.choice(list(operations.keys()))
+# 랜덤 연산자를 선택 // random.choice는 list 형태로 받음
+# 자료형변환으로 오퍼레이션.키즈를 딕셔너리에서 리스트로 바꿔줌
 
 integer_random_one, integer_random_two = [random.randint(1, 10) for _ in range(2)]
 msg = f"{integer_random_one} {operator_fx} {integer_random_two} = ?"
