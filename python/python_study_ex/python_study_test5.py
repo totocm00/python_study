@@ -14,3 +14,5 @@ if (core != ""):
     print(core)
 else:
     print("Unknown")
+
+print("끝")
