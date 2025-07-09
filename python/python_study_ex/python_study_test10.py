@@ -22,6 +22,15 @@ operations = {
     if b != 0
     else "나눗셈 오류"
 }
+
+x = 0
+match x:
+    case 1: 
+        print("정답")
+    case 2:
+        print("오답")
+
+
 # key : value 딕셔너리 형태
 # key 값은 +, -, *, / 의 문자열
 # value 는 람다식
