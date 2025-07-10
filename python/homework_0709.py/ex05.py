@@ -5,3 +5,10 @@ for i in range(1,input_x+1):
     for _ in range(i):
         print("*",end=" ")
     print()
+
+# refactor??
+# for i in range(num+1):
+#   for j in range(1,num+1):
+#       if j<=i:
+#           print("*",end="")
+#       print("\n")
