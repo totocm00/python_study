@@ -11,3 +11,17 @@ w = 1
 while w * w <= 500:
     w += 1
 print(f"2. 가장 작은 w은 {w}")
+
+
+# refactor
+# while n<500:
+#     if (n**2) > 500:
+#         print(n)
+#         break
+#     n+=1
+
+# while n<500:
+#     if pow(n,2) > 500:
+#         print(n)
+#         break
+#     n+=1
