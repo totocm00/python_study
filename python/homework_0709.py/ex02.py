@@ -4,3 +4,11 @@ answer = 0
 for i in range(len(myList)):
     answer += myList[i]
 print(answer)
+
+
+# refactor
+sum = 0
+for i in range(myList):
+    sum += i
+
+print("정수들의 합은", sum)
