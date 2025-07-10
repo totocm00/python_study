@@ -44,3 +44,18 @@ print(f"{x}와 {y}의 최대공약수는 {gcd(x, y)}입니다.")
 # 1. a, b = 48, 18 → 48 % 18 = 12 → 다음 단계로
 # 2. a, b = 18, 12 → 18 % 12 = 6 → 다음
 # 3. a, b = 12, 6 → 12 % 6 = 0 → 끝!
+
+# refactor
+a = int(input())
+b = int(input())
+
+common = 0
+max = a
+if a < b:
+    max = b
+
+for i in range(1,max):
+    if a%i == 0 and b%i ==0:
+        common = i
+
+print(a, "와", b, "의 최대 공약수는", common,"입니다.")
