@@ -15,21 +15,28 @@ arithmetic_choice = [
     lambda a, b : a + b,
     lambda a, b : a - b,
     lambda a, b : a * b,
-    lambda a, b : a / b if b != 0 else "0으로 나누기 x"
+    lambda a, b : (a / b) if b != 0 else "0으로 나누기 x"
 ]
 
 user_num_choice = []
 if user_correct_number == 1:
     user_num_choice = [ran_ten for _ in range(2)]
-if user_correct_number == 2:
+elif user_correct_number == 2:
     user_num_choice = [ran_hundred for _ in range(2)]
-if user_correct_number == 3:
+elif user_correct_number == 3:
     user_num_choice = [month, day]
+else:
+    print("잘못된 입력입니다.")
+    exit()
+    
+symbols = ['+', '-', '*', '/']
 
 def make_math_quiz(input1,input2,oper_index):
-    arith_choice = arithmetic_choice[oper_index -1]
-    answer = arith_choice(input1,input2)
-    print(f"문제: {input1} {'+ - * /'[oper_index-1]} {input2} = ?")
+    op_func = arithmetic_choice[oper_index -1]
+    op_symbol = symbols[oper_index -1]
+    answer = op_func(input1,input2)
+
+    print(f"문제: {input1} {op_symbol} {input2} = ?")
     print(f"정답: {answer}")
     
 make_math_quiz(user_num_choice[0],user_num_choice[1],user_correct_math)
