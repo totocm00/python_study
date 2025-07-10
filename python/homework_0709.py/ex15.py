@@ -17,3 +17,8 @@ for i in range(1,origin_ip+1,2):
 print(f"앞의 수 합 {capy_i}")
 print(f"뒤의 수의 합 {capy_two_gap}")
 print(f"분수의 총 합은 {capy_division_plus:.2f}")
+
+# refactor
+sum = 0
+for i in range(1,100,2):
+    sum += i / (i + 2)
