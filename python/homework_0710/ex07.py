@@ -6,22 +6,20 @@ def day_re():
     day_input = int(input("일을 입력하시오(1부터 31사이의 값) : "))
     return day_input
 
+def loop_input(star1,end1,inputS,msg,fun_re):
+    count = 0
+    while not (star1 <= inputS <= end1):
+        print(msg)
+        inputS = fun_re()
+        if (star1 <= inputS <= end1):
+            break
+        count += 1
+    return inputS,count
+
 def getIntRange(a,b,msg):
-    print(msg)
-    mon_count = 0    
-    day_count = 0    
-    while not (1 <= a <= 12):
-        print("월 다시 입력")
-        a = mon_re()
-        if (1 <= a <= 12):
-            break
-        mon_count += 1
-    while not (1 <= b <= 31):
-        print("일 다시 입력")
-        b = day_re()
-        if (1 <= b <= 31):
-            break
-        day_count += 1
+    print(msg)  
+    a, mon_count = loop_input(1, 12, a, "월 다시 입력", mon_re)
+    b, day_count = loop_input(1, 31, b, "일 다시 입력", day_re)
 
     msg = "탈출을 축하 합니다"
     mon_day = f"{a}월{b}일"
