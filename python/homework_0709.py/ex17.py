@@ -20,3 +20,5 @@ for i in range(10):
     if i % 5 == 0:
         temp += "Buzz"
     print(temp.strip()) if temp else "*"
+
+# 21로 수정해서
