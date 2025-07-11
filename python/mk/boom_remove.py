@@ -25,3 +25,9 @@ def life_zoro_check(life):
     if life == 0:
         return True
     return False
+
+# 폭탄단어와 유저입력이 같은지 체크
+def boomAndInput_check(boom,userInput):
+    if boom == userInput:
+        return True
+    return False
