@@ -1,3 +1,5 @@
+import random
+
 score=0
 idiom = [
     ["가까운","무당보다 먼 데 무당이 영하다"],
