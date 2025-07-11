@@ -14,3 +14,14 @@ limit_time = 2
 # 유저한테 인풋
 def user_input():
     return input("단어 입력")
+
+# 랜덤 단어를 출력
+def random_output(boom_list):
+    random.shuffle(boom_list)
+    return random.choice(boom_list)
+
+# 생명이 0인지 체크
+def life_zoro_check(life):
+    if life == 0:
+        return True
+    return False
