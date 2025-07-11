@@ -31,3 +31,11 @@ def boomAndInput_check(boom,userInput):
     if boom == userInput:
         return True
     return False
+
+# 2초 타이머
+def time_two_second():
+    timeout = 2 # 60에 1분
+    start = time.time()
+    while time.time() - start < timeout:
+	    pass
+print("타임어택 종료!")
