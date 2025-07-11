@@ -16,22 +16,34 @@ idiom = [
 ]
 
 
+def list_random_choice(a):
+	ran_list = random.choice(a)
+	x = ran_list[0]
+	y = ran_list[1]
+	return x, y
+	
+def check_correct(answer,back):
+	if answer == back:
+		return True
+	return False
+
+def input_print():
+	input("뒤 답을 작성하시오").strip()
+
 for total in range(5):
-
-	ran_list = random.choice(idiom)
-	front = ran_list[0]
-	back = ran_list[1]
-
+	front, back = list_random_choice(idiom)
 
 	print(f"속담: \"{front}__\"")
-	answer=input("뒤 답을 작성하시오").strip()
+	answer = input_print()
 	
-	if back == answer:
+	correct = check_correct(answer,back)
+	
+	if correct:
 		print("정답입니다!\n")
 		score +=1
 	else:
 		print(f"오답입니다. 힌트 \"{back[0]}\"")
-		answer=input("뒤 답을 작성하시오").strip()
+		answer = input_print()
 
 		if answer == back:
 			print("정답입니다!")
