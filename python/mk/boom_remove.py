@@ -64,12 +64,14 @@ def input_user_word():
     return input().split()
 
 # 유저에게 시간안에 단어를 인풋받기
-def input_timeOut_elapesd():
+def input_timeOut_elapsed():
     start = time.time()
-    input_user_word()
-    end = time.time()
+    user_input = input_user_word()
+    if start < TIME_TWO_SEC:
+        return start
+    end = time.time()    
     elapesd = end - start
-    return elapesd
+    return elapesd, user_input
 
 # 유저에게 몇 레벨로 플레이할지 물어보는 인풋
 def input_user_lever():
@@ -121,8 +123,11 @@ def game_star_msg():
 def choice_game_level(input_level):
     return 10 * input_level
 
-# # 목숨을 깍는 함수..!
-# def gmae_life_minu(human_life):
+# 목숨을 깎는 함수..!
+# 본문에서 lamdba human_life : hu_life -1로 사용
+def decrease_life(human_life):
+    return human_life -1
+
 
 
 
@@ -155,12 +160,14 @@ for i in range(level):
         boom = random_output(word_list)
         print(boom)
         i += 1
-
         # False이면  값을 복사해서 공간이 확보된 상황 -> 줄여주는 방향으로
         if not allow_duplicates:
             word_list.remove(boom)
 
-
+        # 유저 입력 경과시간과 흐른시간을 계산해서
+        elapsed, user_input = input_timeOut_elapsed()
+        
+        if elapsed < 2:
 
 
     
