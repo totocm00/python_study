@@ -8,6 +8,7 @@ BOOM_LIST = [
     "비행기", "바다", "펜", "신발", "달력"
 ]
 
+
 GAME_START_MSG_MENT = "게임을 시작합니다"
 GAME_START_MSG_C_THREE = "3"
 GAME_START_MSG_C_TWO = "2"
@@ -15,6 +16,13 @@ GAME_START_MSG_C_ONE = "1"
 GAME_START_MSG_C_START = "START"
 TIME_ONE_SEC = 1
 LIFE_DIFAULT_VALUE = 3
+
+GAME_START_SEQUENCE = [
+    GAME_START_MSG_C_THREE,
+    GAME_START_MSG_C_TWO,
+    GAME_START_MSG_C_ONE,
+    GAME_START_MSG_C_START
+]
 
 
 life = 3
@@ -54,24 +62,12 @@ def time_two_second(n):
 	    pass
 print("타임어택 종료!")
 
+# 순서대로 메시지를 뱉아내도록 생성 
+def game_star_msg():
+    for msg in range(GAME_START_SEQUENCE[:-1]):
+        print(msg)
+        time_two_second(TIME_ONE_SEC)
 
-
-print(GAME_START_MSG_MENT)
-
-print(GAME_START_MSG_C_THREE)
-time_two_second(TIME_ONE_SEC)
-
-print(GAME_START_MSG_C_TWO)
-time_two_second(TIME_ONE_SEC)
-
-print(GAME_START_MSG_C_TWO)
-time_two_second(TIME_ONE_SEC)
-
-print(GAME_START_MSG_C_ONE)
-time_two_second(TIME_ONE_SEC)
-
-print(GAME_START_MSG_C_START)
-time_two_second(TIME_ONE_SEC)
 
 # 붐리스트 생성
 random_output(BOOM_LIST)
