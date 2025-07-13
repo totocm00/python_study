@@ -4,7 +4,6 @@ import time
 '''
 ReadMe:
 
-<h3 or 4>
 1. 게임이 시작 될 때 필요한 부분들을 생성.
     - 폭탄리스트, 매 판 새로운 순서-> 셔플로 리스트 재생성, 생명, 타이머 생성,
       생명체크(생명 0이면 False 로 반복문 종료시키도록),
@@ -14,8 +13,6 @@ ReadMe:
 
 3. 게임 시작 멘트나 멘트들을 모아두는 함수를 생성 -> 상수로 변경되고 -> list로 변경되었음
       
-
-</h4>
 
 
 '''
@@ -35,6 +32,7 @@ GAME_START_MSG_C_TWO = "2"
 GAME_START_MSG_C_ONE = "1"
 GAME_START_MSG_C_START = "START"
 TIME_ONE_SEC = 1
+TIME_TWO_SEC = 2
 LIFE_DIFAULT_VALUE = 3
 
 GAME_START_SEQUENCE = [
@@ -55,21 +53,24 @@ def user_input():
 
 # 랜덤 단어를 출력
 def random_output(boom_list):
-    random.shuffle(boom_list)
     return random.choice(boom_list)
+
+# 랜덤 문장의 출력 순서를 변경해줌
+def random_shuffle(boom_list):
+    random.shuffle(boom_list)
 
 # 생명 생성
 def generate_life_default(n):
      return n
 
 # 생명이 0인지 체크
-def life_zoro_check(life):
+def check_life_zoro(life):
     if life == 0:
         return True
     return False
 
 # 폭탄단어와 유저입력이 같은지 체크
-def boomAndInput_check(boom,userInput):
+def check_boomAndInput(boom,userInput):
     if boom == userInput:
         return True
     return False
@@ -80,7 +81,6 @@ def time_two_second(n):
     start = time.time()
     while time.time() - start < timeout:
 	    pass
-print("타임어택 종료!")
 
 # 순서대로 메시지를 뱉아내도록 생성 
 def game_star_msg():
@@ -89,12 +89,26 @@ def game_star_msg():
         time_two_second(TIME_ONE_SEC)
 
 
+
+
 # 붐리스트 생성
 boom_list = random_output(BOOM_LIST)
 # 생명 생성
 human_life = generate_life_default(LIFE_DIFAULT_VALUE)
 
+for i in range(len(BOOM_LIST)):
+    
+    while True:
 
+        
+        print
+        time_two_second(TIME_TWO_SEC)
+
+
+
+
+
+        break
 
 
 
