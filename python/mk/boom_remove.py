@@ -59,7 +59,7 @@ LIMIT_TIME = 30
 
 life = 3
 score = 0
-limit_time = 2
+remaining_time = 0
 user_input = None
 elapsed_time = 0
 
@@ -73,7 +73,7 @@ import threading
 def input_timeOut_elapsed(TIME_TWO_SEC):    
     # 누적 시간을 계산하기 위한 전역변수 세팅
     global elapsed_time
-
+    global remaining_time
     # 함수 객체 자체를 의미하므로 실행하지 않고 바라보고 있다는 의미 / 함수() 는 즉시 실행해버림
     input_thread = threading.Thread(target=input_user_word)
 
@@ -195,19 +195,33 @@ while i < level and word_list:
     # 유저 입력 경과시간과 흐른시간 판단
     # + if 문에서 None,False,"",[],{}빈 딕셔너리 빈 리스트 빈 문자열 등이면 조건 False
     # + 나머지는 다 True로 적용
+
+    # None인지 인풋인지 / 경과시간
     result, elapsed_time = input_timeOut_elapsed(TIME_TWO_SEC)
-    if result:
+
+    # 남은 시간
+    remaining_time += elapsed_time
+    
+    #
+    if remaining_time >= LIMIT_TIME:
+        print("모든 시간 다 사용함")
+        break
+
+    if result == boom:
         correct += 1
+        print(f"남은 시간: {LIMIT_TIME - remaining_time}")
     else:
         human_life -= 1
+        print(f"남은 시간: {LIMIT_TIME - remaining_time}")
     
     if human_life == 0:
         print("목숨을 다 사용했습니다.")
         break
+
 print(f"맞춘 개수: {correct}")
 if human_life:
     print(f"남은 생명력: {human_life}")
-print(f"경과 시간: {elapsed_time}")
+print(f"경과 시간: {remaining_time}")
 
         
             
