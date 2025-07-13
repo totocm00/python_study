@@ -1,6 +1,7 @@
 import random
 import time
 import threading
+import os
 
 BOOM_LIST = [
     "참외", "수박", "토끼", "의자", "컴퓨터", 
@@ -19,6 +20,12 @@ GAME_START_MSG_C_START = "START"
 TIME_ONE_SEC = 1
 TIME_TWO_SEC = 2
 LIFE_DIFAULT_VALUE = 3
+
+TIME_THREE_SEC = 3
+TIME_FOUR_SEC = 4
+TIME_FIVE_SEC = 5
+TIME_TEN_SEC = 10
+
 
 GAME_START_SEQUENCE = [
     GAME_START_MSG_C_THREE,
@@ -42,6 +49,7 @@ elapsed_time = 0
 def input_user_word():
     global user_input
     user_input = input()
+    os.system('cls')
 
 def input_timeOut_elapsed(TIME_TWO_SEC):    
     global elapsed_time
@@ -130,7 +138,7 @@ while i < level:
     if not allow_duplicates:
         word_list.remove(boom)
 
-    user_input, elapsed_time = input_timeOut_elapsed(TIME_TWO_SEC)
+    user_input, elapsed_time = input_timeOut_elapsed(TIME_FIVE_SEC)
     remaining_time += elapsed_time
     print("-----------------------")
     if remaining_time >= LIMIT_TIME:
@@ -150,8 +158,11 @@ while i < level:
 
 
 # ------------게임 종료 -----------------------------------------
-
+print("-----------------------")
+print("-------go saeng--------")
+print("-----------------------")
+print("-----------------------")
 print(f"맞춘 개수: {correct}")
 if human_life:
     print(f"남은 생명력: {human_life}")
-print(f"경과 시간: {remaining_time}")
+print(f"경과 시간: {remaining_time:.2f}")
