@@ -13,7 +13,9 @@ ReadMe:
 
 3. 게임 시작 멘트나 멘트들을 모아두는 함수를 생성 -> 상수로 변경되고 -> list로 변경되었음
       
-
+### 추가 구현 기록
+# 게임의 난이도 조정 1번째 맞추는 개수 생성 -( 이후 추가: 난이도 조절에서 시간을 줄이는 구현 예정 )
+# 유저 생명력 default 값 부여 - ( 이후 추가 : 난이도 조절에서 라이프 개수를 줄이는 방법도 구현 예정)
 
 '''
 
@@ -88,20 +90,30 @@ def game_star_msg():
         print(msg)
         time_two_second(TIME_ONE_SEC)
 
+# 게임의 난이도 조정 1번째 맞추는 개수 생성 -( 이후 추가: 난이도 조절에서 시간을 줄이는 구현 예정 )
+def choice_game_level(input_level):
+    return 10 * input_level
 
+# ---------------------------아래는 게임의 영역 ------------------
 
+# 게임 시작시 순서를 섞어줌
+random_shuffle(BOOM_LIST)
 
-# 붐리스트 생성
-boom_list = random_output(BOOM_LIST)
-# 생명 생성
+# 유저 생명력 default 값 부여 - ( 이후 추가 : 난이도 조절에서 라이프 개수를 줄이는 방법도 구현 예정)
 human_life = generate_life_default(LIFE_DIFAULT_VALUE)
 
-for i in range(len(BOOM_LIST)):
+
+
+level = choice_game_level(GAME_LEVEL_OEN)
+
+
+for i in range(level):
+    
+    # 붐 단어를 뽑아옴 생성
+    random_boom = random_output(BOOM_LIST)
     
     while True:
-
-        
-        print
+        print(f"")
         time_two_second(TIME_TWO_SEC)
 
 
