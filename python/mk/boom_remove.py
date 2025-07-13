@@ -57,10 +57,11 @@ ALLOW_DUPLICATES_FLASE = False
 LIMIT_TIME = 30
 
 
-# user_input = None -> 함수안에서 global 써볼꺼임
 life = 3
 score = 0
 limit_time = 2
+user_input = None
+elapsed_time = 0
 
 # 유저에게 단어를 받는 인풋
 def input_user_word():
@@ -79,27 +80,23 @@ def input_timeOut_elapsed(TIME_TWO_SEC):
     # 스레드 시작(비동기적으로 get_user_input() 실행)
     input_thread.start()
     
+    # timeout초 동안 기다림 -> 직접 구현함
+    # input_thread.join(timeout=TIME_TWO_SEC) 
     start_time = time.time()
-
+    # 스레드 실행중일때 True이면 계속 돌아감
     while input_thread.is_alive():
         elapsed_time = time.time() - start_time
 
-    # timeout초 동안 기다림 
-    input_thread.join(timeout=TIME_TWO_SEC)
+        # 시간 초과인지 아닌지 판단
+        # if input_thread.is_alive():
+        if elapsed_time >= TIME_TWO_SEC:    
+            print("⏰ 시간 초과! 입력 실패")
+            return None, elapsed_time
     
-    # 시간 초과인지 아닌지 판단
-    if input_thread.is_alive():
-        print("⏰ 시간 초과! 입력 실패")
-        return None, elapsed_time
-    else:
-        end_time = time.time()
-        total_time = end_time - start_time
-        return user_input, total_time
-
-# # 유저에게 시간안에 단어를 인풋받기
-# def game_timeOut(start_time):
-#     return time.time() - start_time
-
+    # 입력 완료시 스레드 종료하고 리턴함
+    end_time = time.time()
+    total_time = end_time - start_time
+    return user_input, total_time
 
 # 유저에게 몇 레벨로 플레이할지 물어보는 인풋
 def input_user_lever():
@@ -198,7 +195,7 @@ while i < level and word_list:
     # 유저 입력 경과시간과 흐른시간 판단
     # + if 문에서 None,False,"",[],{}빈 딕셔너리 빈 리스트 빈 문자열 등이면 조건 False
     # + 나머지는 다 True로 적용
-    result = input_timeOut_elapsed(TIME_TWO_SEC)
+    result, elapsed_time = input_timeOut_elapsed(TIME_TWO_SEC)
     if result:
         correct += 1
     else:
@@ -210,7 +207,7 @@ while i < level and word_list:
 print(f"맞춘 개수: {correct}")
 if human_life:
     print(f"남은 생명력: {human_life}")
-print(f"경과 시간: {}")
+print(f"경과 시간: {elapsed_time}")
 
         
             
