@@ -49,9 +49,18 @@ life = 3
 score = 0
 limit_time = 2
 
-# 유저한테 인풋
-def user_input():
-    return input("단어 입력")
+# 유저에게 단어를 받는 인풋
+def input_user_word():
+    return input()
+
+# 유저에게 몇 레벨로 플레이할지 물어보는 인풋
+def input_user_lever():
+    print("플레이 할 단계를 선택하세요")
+    print("1. LV1")
+    print("2. LV2")
+    print("2. LV3")
+    return input()
+
 
 # 랜덤 단어를 출력
 def random_output(boom_list):
@@ -96,13 +105,16 @@ def choice_game_level(input_level):
 
 # ---------------------------아래는 게임의 영역 ------------------
 
+
+
+
 # 게임 시작시 순서를 섞어줌
 random_shuffle(BOOM_LIST)
 
 # 유저 생명력 default 값 부여 - ( 이후 추가 : 난이도 조절에서 라이프 개수를 줄이는 방법도 구현 예정)
 human_life = generate_life_default(LIFE_DIFAULT_VALUE)
 
-
+print()
 
 level = choice_game_level(GAME_LEVEL_OEN)
 
