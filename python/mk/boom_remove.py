@@ -168,29 +168,32 @@ human_life = generate_life_default(LIFE_DIFAULT_VALUE)
 #
 correct = 0
 
-for i in range(level):
-    # 중복 허용 여부 True면 word_list에 깊은 복사
-    allow_duplicates = ALLOW_DUPLICATES_TRUE
-    word_list = BOOM_LIST if allow_duplicates else BOOM_LIST[:]
-    
-    i = 0
-    while i < level and word_list:
-        # 붐 단어를 뽑아옴 생성
-        boom = random_output(word_list)
-        print(boom)
-        i += 1
-        # False이면  값을 복사해서 공간이 확보된 상황 -> 줄여주는 방향으로
-        if not allow_duplicates:
-            word_list.remove(boom)
 
-        # 유저 입력 경과시간과 흐른시간 판단
-        # + if 문에서 None,False,"",[],{}빈 딕셔너리 빈 리스트 빈 문자열 등이면 조건 False
-        # + 나머지는 다 True로 적용
-        result = input_timeOut_elapsed(TIME_TWO_SEC)
-        if result:
-            correct += 1
+# 중복 허용 여부 True면 word_list에 깊은 복사
+allow_duplicates = ALLOW_DUPLICATES_TRUE
+word_list = BOOM_LIST if allow_duplicates else BOOM_LIST[:]
 
-        print
+i = 0
+
+start = time.time()
+elapsed_time = game_timeOut(start)
+while i < level and word_list:
+    # 붐 단어를 뽑아옴 생성
+    boom = random_output(word_list)
+    print(boom)
+    i += 1
+    # False이면  값을 복사해서 공간이 확보된 상황 -> 줄여주는 방향으로
+    if not allow_duplicates:
+        word_list.remove(boom)
+
+    # 유저 입력 경과시간과 흐른시간 판단
+    # + if 문에서 None,False,"",[],{}빈 딕셔너리 빈 리스트 빈 문자열 등이면 조건 False
+    # + 나머지는 다 True로 적용
+    result = input_timeOut_elapsed(TIME_TWO_SEC)
+    if result:
+        correct += 1
+
+        
             
 
         
