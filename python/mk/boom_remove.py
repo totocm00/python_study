@@ -17,6 +17,13 @@ ReadMe:
 # 게임의 난이도 조정 1번째 맞추는 개수 생성 -( 이후 추가: 난이도 조절에서 시간을 줄이는 구현 예정 )
 # 유저 생명력 default 값 부여 - ( 이후 추가 : 난이도 조절에서 라이프 개수를 줄이는 방법도 구현 예정)
 
+
+# 리드미에 순서도를 만들어서 적어두고 구현을 순서대로 하면 편했을것 같은데..
+# 함수로 추가 내용들과 아이디어가 생기니까 이슈발생
+# 다음부터는 순서도를 만들고 구현을 완료한 뒤 추가 내용을 생성하고
+# 함수의 분리는 코드가 완성되고 나서 실행해도 괜찮을 것 같다
+
+
 '''
 
 
@@ -111,12 +118,19 @@ def choice_game_level(input_level):
 # 게임 시작시 순서를 섞어줌
 random_shuffle(BOOM_LIST)
 
+# 레벨 물어보는 것 부터 생성
+# -> 레벨에 맞춰서 아래의 휴먼 라이프에 오버라이딩해서
+# if문으로 인자 하나 더 받는 함수 사용
+# genrate_life_default(LIFE_DIFAULT_VALUE,level)
+
+level = choice_game_level(input_user_lever())
+
+
 # 유저 생명력 default 값 부여 - ( 이후 추가 : 난이도 조절에서 라이프 개수를 줄이는 방법도 구현 예정)
 human_life = generate_life_default(LIFE_DIFAULT_VALUE)
 
 print()
 
-level = choice_game_level(GAME_LEVEL_OEN)
 
 
 for i in range(level):
