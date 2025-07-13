@@ -54,25 +54,34 @@ GAME_START_SEQUENCE = [
 ALLOW_DUPLICATES_TRUE = True
 ALLOW_DUPLICATES_FLASE = False
 
-
+# user_input = None -> 함수안에서 global 써볼꺼임
 life = 3
 score = 0
 limit_time = 2
 
 # 유저에게 단어를 받는 인풋
 def input_user_word():
-    return input().split()
+    global user_input # 전역 변수임을 명시
+    user_input = input().split()
 
-# 유저에게 시간안에 단어를 인풋받기
-def input_timeOut_elapsed():
-    start = time.time()
-    timeOut = time.time()
-    if timeOut < TIME_TWO_SEC:
-        return False
-    user_input = input_user_word()
-    end = time.time()    
-    elapesd = end - start
-    return elapesd, user_input
+# 유저에게 인풋 받기 
+import threading
+def input_timeOut_elapsed(TIME_TWO_SEC):
+    # 함수 객체 자체를 의미하므로 실행하지 않고 바라보고 있다는 의미 / 함수() 는 즉시 실행해버림
+    input_thread = threading.Thread(target=input_user_word)
+    
+    # 스레드 시작(비동기적으로 get_user_input() 실행)
+    input_thread.start()
+
+    # timeout초 동안 기다림 
+    input_thread.join(timeout=TIME_TWO_SEC)
+    
+    # 시간 초과인지 아닌지 판단
+    if input_thread.is_alive():
+        print("⏰ 시간 초과! 입력 실패")
+        return None
+    else:
+        return user_input
 
 # 유저에게 몇 레벨로 플레이할지 물어보는 인풋
 def input_user_lever():
