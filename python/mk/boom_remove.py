@@ -51,6 +51,8 @@ GAME_START_SEQUENCE = [
     GAME_START_MSG_C_START
 ]
 
+ALLOW_DUPLICATES_TRUE = True
+ALLOW_DUPLICATES_FALSE = False
 
 life = 3
 score = 0
@@ -58,7 +60,15 @@ limit_time = 2
 
 # 유저에게 단어를 받는 인풋
 def input_user_word():
-    return input()
+    return input().split()
+
+# 유저에게 시간안에 단어를 인풋받기
+def input_timeOut_elapesd():
+    start = time.time()
+    input_user_word()
+    end = time.time()
+    elapesd = end - start
+    return elapesd
 
 # 유저에게 몇 레벨로 플레이할지 물어보는 인풋
 def input_user_lever():
@@ -110,6 +120,20 @@ def game_star_msg():
 def choice_game_level(input_level):
     return 10 * input_level
 
+# 게임 시작 / 이슈: 데이터를 복사하는 코스트와 원본을 수정해도 상관없는 두 가지를 테스트 위해 만들어봄
+def play_game(boom_list, level, allow_duplicates=True):
+    word_list = boom_list[:] if allow_duplicates else boom_list
+    
+    i = 0
+    while i < level and word_list:
+        boom = random.choice(word_list)
+        print(boom)
+
+        if not allow_duplicates:
+            word_list.remove(boom)
+
+
+
 # ---------------------------아래는 게임의 영역 ------------------
 
 
@@ -122,20 +146,18 @@ random_shuffle(BOOM_LIST)
 # -> 레벨에 맞춰서 아래의 휴먼 라이프에 오버라이딩해서
 # if문으로 인자 하나 더 받는 함수 사용
 # genrate_life_default(LIFE_DIFAULT_VALUE,level)
-
 level = choice_game_level(input_user_lever())
 
 
 # 유저 생명력 default 값 부여 - ( 이후 추가 : 난이도 조절에서 라이프 개수를 줄이는 방법도 구현 예정)
 human_life = generate_life_default(LIFE_DIFAULT_VALUE)
 
-print()
 
 
 
 for i in range(level):
     
-    # 붐 단어를 뽑아옴 생성
+    # 붐 단어를 뽑아옴 생성 # 아마 이 부분을 리스트로 하나 [:] 카피하고 remove하면 된다는 의미일듯
     random_boom = random_output(BOOM_LIST)
     
     while True:
