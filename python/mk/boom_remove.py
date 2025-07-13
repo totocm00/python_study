@@ -56,6 +56,7 @@ ALLOW_DUPLICATES_FLASE = False
 
 LIMIT_TIME = 30
 
+
 # user_input = None -> 함수안에서 global 써볼꺼임
 life = 3
 score = 0
@@ -68,12 +69,20 @@ def input_user_word():
 
 # 유저에게 인풋 받기 
 import threading
-def input_timeOut_elapsed(TIME_TWO_SEC):
+def input_timeOut_elapsed(TIME_TWO_SEC):    
+    # 누적 시간을 계산하기 위한 전역변수 세팅
+    global elapsed_time
+
     # 함수 객체 자체를 의미하므로 실행하지 않고 바라보고 있다는 의미 / 함수() 는 즉시 실행해버림
     input_thread = threading.Thread(target=input_user_word)
-    
+
     # 스레드 시작(비동기적으로 get_user_input() 실행)
     input_thread.start()
+    
+    start_time = time.time()
+
+    while input_thread.is_alive():
+        elapsed_time = time.time() - start_time
 
     # timeout초 동안 기다림 
     input_thread.join(timeout=TIME_TWO_SEC)
@@ -81,13 +90,15 @@ def input_timeOut_elapsed(TIME_TWO_SEC):
     # 시간 초과인지 아닌지 판단
     if input_thread.is_alive():
         print("⏰ 시간 초과! 입력 실패")
-        return None
+        return None, elapsed_time
     else:
-        return user_input
+        end_time = time.time()
+        total_time = end_time - start_time
+        return user_input, total_time
 
-# 유저에게 시간안에 단어를 인풋받기
-def game_timeOut(start_time):
-    return time.time() - start_time
+# # 유저에게 시간안에 단어를 인풋받기
+# def game_timeOut(start_time):
+#     return time.time() - start_time
 
 
 # 유저에게 몇 레벨로 플레이할지 물어보는 인풋
@@ -175,8 +186,6 @@ word_list = BOOM_LIST if allow_duplicates else BOOM_LIST[:]
 
 i = 0
 
-start = time.time()
-elapsed_time = game_timeOut(start)
 while i < level and word_list:
     # 붐 단어를 뽑아옴 생성
     boom = random_output(word_list)
@@ -192,6 +201,16 @@ while i < level and word_list:
     result = input_timeOut_elapsed(TIME_TWO_SEC)
     if result:
         correct += 1
+    else:
+        human_life -= 1
+    
+    if human_life == 0:
+        print("목숨을 다 사용했습니다.")
+        break
+print(f"맞춘 개수: {correct}")
+if human_life:
+    print(f"남은 생명력: {human_life}")
+print(f"경과 시간: {}")
 
         
             
