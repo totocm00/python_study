@@ -52,7 +52,8 @@ GAME_START_SEQUENCE = [
 ]
 
 ALLOW_DUPLICATES_TRUE = True
-ALLOW_DUPLICATES_FALSE = False
+ALLOW_DUPLICATES_FLASE = False
+
 
 life = 3
 score = 0
@@ -120,17 +121,8 @@ def game_star_msg():
 def choice_game_level(input_level):
     return 10 * input_level
 
-# 게임 시작 / 이슈: 데이터를 복사하는 코스트와 원본을 수정해도 상관없는 두 가지를 테스트 위해 만들어봄
-def play_game(boom_list, level, allow_duplicates=True):
-    word_list = boom_list[:] if allow_duplicates else boom_list
-    
-    i = 0
-    while i < level and word_list:
-        boom = random.choice(word_list)
-        print(boom)
-
-        if not allow_duplicates:
-            word_list.remove(boom)
+# # 목숨을 깍는 함수..!
+# def gmae_life_minu(human_life):
 
 
 
@@ -148,27 +140,31 @@ random_shuffle(BOOM_LIST)
 # genrate_life_default(LIFE_DIFAULT_VALUE,level)
 level = choice_game_level(input_user_lever())
 
-
 # 유저 생명력 default 값 부여 - ( 이후 추가 : 난이도 조절에서 라이프 개수를 줄이는 방법도 구현 예정)
 human_life = generate_life_default(LIFE_DIFAULT_VALUE)
 
 
-
-
 for i in range(level):
+    # 중복 허용 여부 True면 word_list에 깊은 복사
+    allow_duplicates = ALLOW_DUPLICATES_TRUE
+    word_list = BOOM_LIST if allow_duplicates else BOOM_LIST[:]
     
-    # 붐 단어를 뽑아옴 생성 # 아마 이 부분을 리스트로 하나 [:] 카피하고 remove하면 된다는 의미일듯
-    random_boom = random_output(BOOM_LIST)
+    i = 0
+    while i < level and word_list:
+        # 붐 단어를 뽑아옴 생성
+        boom = random_output(word_list)
+        print(boom)
+        i += 1
+
+        # False이면  값을 복사해서 공간이 확보된 상황 -> 줄여주는 방향으로
+        if not allow_duplicates:
+            word_list.remove(boom)
+
+
+
+
     
-    while True:
-        print(f"")
-        time_two_second(TIME_TWO_SEC)
 
-
-
-
-
-        break
 
 
 
