@@ -1,6 +1,26 @@
 import random
 import time
 
+'''
+ReadMe:
+
+<h3 or 4>
+1. 게임이 시작 될 때 필요한 부분들을 생성.
+    - 폭탄리스트, 매 판 새로운 순서-> 셔플로 리스트 재생성, 생명, 타이머 생성,
+      생명체크(생명 0이면 False 로 반복문 종료시키도록),
+
+2. while을 함수로 만들면 안의 내용도 집어 넣어야 하고
+    받아서 사용하는 인자들이 많아지므로 while은 밖에서 만든다.
+
+3. 게임 시작 멘트나 멘트들을 모아두는 함수를 생성 -> 상수로 변경되고 -> list로 변경되었음
+      
+
+</h4>
+
+
+'''
+
+
 BOOM_LIST = [
     "참외", "수박", "토끼", "의자", "컴퓨터", 
     "자동차", "사자", "초콜릿", "연필", "강아지",
@@ -70,9 +90,9 @@ def game_star_msg():
 
 
 # 붐리스트 생성
-random_output(BOOM_LIST)
+boom_list = random_output(BOOM_LIST)
 # 생명 생성
-generate_life_default(LIFE_DIFAULT_VALUE)
+human_life = generate_life_default(LIFE_DIFAULT_VALUE)
 
 
 
