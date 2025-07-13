@@ -6,7 +6,9 @@ BOOM_LIST = [
     "참외", "수박", "토끼", "의자", "컴퓨터", 
     "자동차", "사자", "초콜릿", "연필", "강아지",
     "노트북", "냉장고", "포도", "커피", "바나나",
-    "비행기", "바다", "펜", "신발", "달력"
+    "비행기", "바다", "펜", "신발", "달력",
+    "책상", "거울", "우산", "고양이", "핸드폰",
+    "라디오", "텔레비전", "냄비", "토마토", "양말"
 ]
 
 GAME_START_MSG_MENT = "게임을 시작합니다"
@@ -39,23 +41,22 @@ elapsed_time = 0
 
 def input_user_word():
     global user_input
-    user_input = input().split()
+    user_input = input()
 
 def input_timeOut_elapsed(TIME_TWO_SEC):    
     global elapsed_time
     global remaining_time
 
     input_thread = threading.Thread(target=input_user_word)
-
     input_thread.start()
     
     start_time = time.time()
-
     while input_thread.is_alive():
         elapsed_time = time.time() - start_time
 
         if elapsed_time >= TIME_TWO_SEC:    
             print("⏰ 시간 초과! 입력 실패")
+            print("-----------------------")
             return None, elapsed_time
     
     end_time = time.time()
@@ -96,6 +97,8 @@ def game_star_msg():
     for msg in GAME_START_SEQUENCE[:-1]:
         print(msg)
         time_two_second(TIME_ONE_SEC)
+    print("!!!------"+GAME_START_MSG_C_START+"------!!!")
+    print("-----------------------")
 
 def choice_game_level(input_level):
     return 10 * input_level
@@ -106,6 +109,7 @@ def choice_game_level(input_level):
 random_shuffle(BOOM_LIST)
 
 level = choice_game_level(int(input_user_level()))
+print("--------잠시 후 시작 합니다---------")
 human_life = generate_life_default(LIFE_DIFAULT_VALUE)
 
 # 중복 허용 여부 True면 word_list에 깊은 복사
@@ -128,11 +132,12 @@ while i < level:
 
     user_input, elapsed_time = input_timeOut_elapsed(TIME_TWO_SEC)
     remaining_time += elapsed_time
-    
+    print("-----------------------")
     if remaining_time >= LIMIT_TIME:
         print("모든 시간 다 사용함")
         break
     print(f"남은 시간: {LIMIT_TIME - remaining_time:.2f}")
+    print("-----------------------")
 
     if check_boomAndInput(boom,user_input):
         correct += 1
