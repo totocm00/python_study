@@ -54,6 +54,8 @@ GAME_START_SEQUENCE = [
 ALLOW_DUPLICATES_TRUE = True
 ALLOW_DUPLICATES_FLASE = False
 
+LIMIT_TIME = 30
+
 # user_input = None -> 함수안에서 global 써볼꺼임
 life = 3
 score = 0
@@ -82,6 +84,11 @@ def input_timeOut_elapsed(TIME_TWO_SEC):
         return None
     else:
         return user_input
+
+# 유저에게 시간안에 단어를 인풋받기
+def game_timeOut(start_time):
+    return time.time() - start_time
+
 
 # 유저에게 몇 레벨로 플레이할지 물어보는 인풋
 def input_user_lever():
@@ -158,6 +165,8 @@ level = choice_game_level(input_user_lever())
 # 유저 생명력 default 값 부여 - ( 이후 추가 : 난이도 조절에서 라이프 개수를 줄이는 방법도 구현 예정)
 human_life = generate_life_default(LIFE_DIFAULT_VALUE)
 
+#
+correct = 0
 
 for i in range(level):
     # 중복 허용 여부 True면 word_list에 깊은 복사
@@ -174,10 +183,17 @@ for i in range(level):
         if not allow_duplicates:
             word_list.remove(boom)
 
-        # 유저 입력 경과시간과 흐른시간을 계산해서
-        elapsed, user_input = input_timeOut_elapsed()
+        # 유저 입력 경과시간과 흐른시간 판단
+        # + if 문에서 None,False,"",[],{}빈 딕셔너리 빈 리스트 빈 문자열 등이면 조건 False
+        # + 나머지는 다 True로 적용
+        result = input_timeOut_elapsed(TIME_TWO_SEC)
+        if result:
+            correct += 1
+
+        print
+            
+
         
-        if elapsed < 2:
 
 
     
