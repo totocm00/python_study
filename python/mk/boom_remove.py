@@ -66,9 +66,10 @@ def input_user_word():
 # 유저에게 시간안에 단어를 인풋받기
 def input_timeOut_elapsed():
     start = time.time()
+    timeOut = time.time()
+    if timeOut < TIME_TWO_SEC:
+        return False
     user_input = input_user_word()
-    if start < TIME_TWO_SEC:
-        return start
     end = time.time()    
     elapesd = end - start
     return elapesd, user_input
