@@ -35,21 +35,21 @@ while True:
             if event.key == pygame.K_q:
                 pygame.quit()
     
-    # 이미지 표시
-    screen.blit(img, (x, y))
-
-    # 텍스트 표시
+    # 타이틀 출력
     # block transfer
     # : 한 이미지의 픽셀 데이터를 다른 표면(Surface)으로 복사하는 작업
     screen.blit(text, (330,0))
     
-    # display에 내용을 업데이트 시킴
-    pygame.display.update()
+    # 이미지 표시
+    screen.blit(img, (x, y))
 
+    # 글자를 표시
     y += 1
     if y > 600:
         y = 0
     screen.blit(text, (x,y))
+
+    # display에 내용을 업데이트 시킴
     pygame.display.update()
-            
+
     clock.tick(60)   # FPS 개념이 .tick = 즉, (숫자)의 FPS
