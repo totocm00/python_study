@@ -19,6 +19,11 @@ img = pygame.image.load(r"C:\Users\types\OneDrive\Desktop\피카츄.jpg")
 # 이미지의 크기가 크면 스케일 다운을 해줌 
 img = pygame.transform.scale(img, (300, 300)) 
 
+# 타이머 이벤트
+TIMER = pygame.USEREVENT + 1
+pygame.time.set_timer(TIMER, 1000) # 1초마다 타이머이벤트 발생 
+
+
 # 좌표 설정
 x = 250
 y = 150
@@ -34,20 +39,34 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
                 pygame.quit()
-    
+        
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                x -= 10
+            if event.key == pygame.K_RIGHT:
+                x += 10
+            if event.key == pygame.K_UP:
+                y -= 10
+            if event.key == pygame.K_DOWN:
+                y += 10
+    screen.blit(img, (x, y))
+
+    pygame.display.update()
+
+
+
     # 타이틀 출력
     # block transfer
     # : 한 이미지의 픽셀 데이터를 다른 표면(Surface)으로 복사하는 작업
-    screen.blit(text, (330,0))
+    # screen.blit(text, (330,0))
     
     # 이미지 표시
-    screen.blit(img, (x, y))
 
     # 글자를 표시
-    y += 1
-    if y > 600:
-        y = 0
-    screen.blit(text, (x,y))
+    # y += 1
+    # if y > 600:
+    #     y = 0
+    # screen.blit(text, (x,y))
 
     # display에 내용을 업데이트 시킴
     pygame.display.update()
