@@ -11,6 +11,10 @@ pygame.display.set_caption("PY게임!") # 맨 위의 타이틀 바
 FONT = pygame.font.SysFont("malgun gothic", 48)
 # render -> 화면에 쓰기위한 함수
 text = FONT.render("Intel", True, (255,255,255))
+
+x = 330
+y = 0
+
 # ---------------------------
 
 while True:
@@ -27,5 +31,11 @@ while True:
     # : 한 이미지의 픽셀 데이터를 다른 표면(Surface)으로 복사하는 작업
     screen.blit(text, (330,0))
     # display에 내용을 업데이트 시킴
+    pygame.display.update()
+
+    y += 1
+    if y > 600:
+        y = 0
+    screen.blit(text, (x,y))
     pygame.display.update()
             
