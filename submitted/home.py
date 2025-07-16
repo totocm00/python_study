@@ -8,7 +8,7 @@ def random_choice():
 def print_mix_list(sentence):
     mixed = sentence.copy()
     random.shuffle(mixed)
-    print("섞인 단어:", mixed)
+    print("섞인 단어:", " ".join(mixed))
     return mixed
 
 def user_input_list():
